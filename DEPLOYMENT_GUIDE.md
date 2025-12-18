@@ -1,4 +1,4 @@
-# Sanchai Weather AI - Deployment Guide
+#  Weather AI - Deployment Guide
 
 This document outlines the professional strategies for deploying the Sanchai Weather AI platform to a production-grade environment, specifically focusing on Vercel integration.
 
