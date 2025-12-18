@@ -5,4 +5,8 @@ requests
 langchain
 langchain-openai
 langchain-community
-langchain-ollama
+langchain-core
+langchain-huggingface
+langchain-chroma
+chromadb
+sentence-transformers
