@@ -1,95 +1,94 @@
-# 🌤️ Sanchai Weather AI
+# Sanchai Weather AI
 
-> **Weather intelligence that thinks before it speaks.**
+## Advanced RAG System for Meteorological Intelligence
 
-Welcome to **Sanchai Weather AI**, a production-grade weather assistant designed to demonstrate the power of **democratized, local-first AI**. 
+Sanchai Weather AI is a production-grade Retrieval-Augmented Generation (RAG) platform designed to provide conversational meteorological insights. It leverages a sophisticated reasoning engine to synthesize real-time telemetry with historical context, providing a highly accurate and context-aware user experience.
 
-Unlike standard weather bots that just read API data, Sanchai uses a **Reasoning Engine (DeepSeek R1T2 Chimera)** to analyze meteorological data, understand context, and provide expert-level insights—all for **100% free**.
-
----
-
-## 🌟 Why Sanchai?
-
-### 🧠 The Reasoning Engine
-Most weather apps just display numbers. Sanchai "thinks" about them. 
-Powered by **DeepSeek R1T2 Chimera** (via OpenRouter), it analyzes:
-- "Is it safe for a garden party given the humidity?"
-- "Compare the visibility in Mumbai vs. Delhi."
-- "What should I wear for a morning run?"
-
-### 🆓 Democratized AI (100% Free)
-We believe powerful AI should be accessible to everyone.
-- **LLM**: DeepSeek R1T2 Chimera (via OpenRouter Free Tier)
-- **Weather Data**: OpenWeatherMap (Free Tier)
-- **Vector DB**: ChromaDB (Local)
-- **Embeddings**: Sentence Transformers (Local/CPU)
-
-### 🔒 Privacy-First RAG
-Your queries aren't just sent to a cloud. Sanchai uses **Retrieval-Augmented Generation (RAG)** with a local Knowledge Base. It learns from your queries, building a personalized database of weather insights that stays on your machine.
+The project is built with a focus on resource efficiency and democratized access, utilizing open-weights models and free-tier API integrations without compromising on professional standards or architectural integrity.
 
 ---
 
-## 🚀 Get Started
+## Core Capabilities
+
+### Reasoning Engine
+The system utilizes the DeepSeek R1T2 Chimera model to perform complex intent analysis and response synthesis. Unlike traditional weather status bots, this engine can interpret subjective queries (e.g., "Is the weather suitable for outdoor events?") by analyzing multiple data points including visibility, pressure trends, and humidity.
+
+### Retrieval-Augmented Generation (RAG)
+By integrating ChromaDB for local vector storage, the system maintains a persistent knowledge base of meteorological insights. Each query is cross-referenced with historically retrieved data, ensuring that responses are grounded in consistent, contextually relevant information.
+
+### Efficient Architecture
+- **Large Language Model**: DeepSeek R1T2 Chimera (via OpenRouter)
+- **Data Source**: OpenWeatherMap API
+- **Vector Database**: ChromaDB (Local Persistent Storage)
+- **Embeddings**: Sentence Transformers (Local Execution)
+
+---
+
+## Getting Started
 
 ### Prerequisites
-- [Node.js](https://nodejs.org/) & [Python 3.10+](https://www.python.org/)
-- A free **OpenRouter API Key** ([Get it here](https://openrouter.ai))
-- A free **OpenWeatherMap API Key** ([Get it here](https://openweathermap.org/api))
+- Python 3.10 or higher
+- Node.js (v18+)
+- OpenRouter API Key
+- OpenWeatherMap API Key
 
-### 1. Backend Setup
+### Installation
+
+1. **Backend Environment**
+   ```bash
+   cd backend
+   python -m venv venv
+   # Windows
+   .\venv\Scripts\activate
+   # Linux/macOS
+   source venv/bin/activate
+   pip install -r requirements.txt
+   ```
+
+2. **Frontend Environment**
+   ```bash
+   cd frontend
+   npm install
+   ```
+
+3. **Configuration**
+   Create a `.env` file in the `backend/` directory using `.env.example` as a template. Populate the required API keys.
+
+### Running the Project
+
+**Start Backend Server:**
 ```bash
 cd backend
-python -m venv venv
-# Windows
-.\venv\Scripts\activate
-# Mac/Linux
-# source venv/bin/activate
-
-pip install -r requirements.txt
-cp .env.example .env
-# Open .env and paste your API keys
+python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-### 2. Frontend Setup
-```bash
-cd frontend
-npm install
-```
-
-### 3. Run It!
-Open two terminal windows:
-
-**Terminal 1 (Backend):**
-```bash
-cd backend
-.\venv\Scripts\python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
-```
-
-**Terminal 2 (Frontend):**
+**Start Frontend Development Server:**
 ```bash
 cd frontend
 npm run dev
 ```
 
-Visit **http://localhost:5173** and ask: *"I'm planning a hike in Pune tomorrow. Is it safe?"*
+The application will be accessible at `http://localhost:5173`.
 
 ---
 
-## 🏗️ How It Works
+## Architecture Overview
 
-1.  **Intent Analysis**: The LLM determines if you need current weather, a forecast, or a comparison.
-2.  **Smart Retrieval**: It checks your local Knowledge Base for past insights.
-3.  **Live Telemetry**: If needed, it fetches fresh data from OpenWeatherMap.
-4.  **Reasoning Synthesis**: DeepSeek R1T2 combines the data and context to generate a natural, helpful answer (stripping away raw "thinking" logs for a clean experience).
+The system follows a modular pipeline for data processing:
 
-## 🛠️ Tech Stack
+1. **Intent Extraction**: Logical analysis of the query to identify target location and information requirements.
+2. **Context Retrieval**: Similarity search against the local vector database for historical insights.
+3. **Telemetry Acquisition**: Real-time data retrieval from meteorological services.
+4. **Insight Synthesis**: DeepSeek-driven generation of natural language responses, filtered for optimal clarity.
 
--   **Intelligence**: DeepSeek R1T2 Chimera (via OpenRouter)
--   **Backend**: Python, FastAPI, LangChain
--   **Memory**: ChromaDB (Vector Store)
--   **Frontend**: React, Vite, TailwindCSS
--   **Design**: Glassmorphism & Dynamic UI
+---
 
-## 📄 License
+## Technical Stack
 
-MIT License. Built with ❤️ for the Open Source community.
+- **Frameworks**: FastAPI (Backend), React (Frontend)
+- **Orchestration**: LangChain
+- **Database**: ChromaDB
+- **Styles**: Tailwind CSS
+- **Models**: DeepSeek R1T2, all-MiniLM-L6-v2
+
+---
