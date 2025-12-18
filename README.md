@@ -10,6 +10,32 @@ The project is built with a focus on resource efficiency and democratized access
 
 ---
 
+## Architecture Overview
+
+```mermaid
+graph TD
+    A[User Query] --> B[LLM Intent Analysis]
+    B --> C{City Extracted?}
+    C -->|Yes| D[Knowledge Base Retrieval]
+    C -->|No| E[Ask for Clarification]
+    D --> F{Fresh Data Needed?}
+    F -->|Yes| G[Fetch Weather API]
+    F -->|No| H[Use KB Context]
+    G --> I[Store in KB]
+    I --> J[LLM Synthesis]
+    H --> J
+    J --> K[Natural Response]
+```
+
+The system follows a modular pipeline for data processing:
+
+1. **Intent Extraction**: Logical analysis of the query to identify target location and information requirements.
+2. **Context Retrieval**: Similarity search against the local vector database for historical insights.
+3. **Telemetry Acquisition**: Real-time data retrieval from meteorological services.
+4. **Insight Synthesis**: DeepSeek-driven generation of natural language responses, filtered for optimal clarity.
+
+---
+
 ## Core Capabilities
 
 ### Reasoning Engine
@@ -23,6 +49,16 @@ By integrating ChromaDB for local vector storage, the system maintains a persist
 - **Data Source**: OpenWeatherMap API
 - **Vector Database**: ChromaDB (Local Persistent Storage)
 - **Embeddings**: Sentence Transformers (Local Execution)
+
+---
+
+## Technical Stack
+
+- **Frameworks**: FastAPI (Backend), React (Frontend)
+- **Orchestration**: LangChain
+- **Database**: ChromaDB
+- **Styles**: Tailwind CSS
+- **Models**: DeepSeek R1T2, all-MiniLM-L6-v2
 
 ---
 
@@ -74,38 +110,6 @@ The application will be accessible at `http://localhost:5173`.
 
 ---
 
-## Architecture Overview
+## License
 
-```mermaid
-graph TD
-    A[User Query] --> B[LLM Intent Analysis]
-    B --> C{City Extracted?}
-    C -->|Yes| D[Knowledge Base Retrieval]
-    C -->|No| E[Ask for Clarification]
-    D --> F{Fresh Data Needed?}
-    F -->|Yes| G[Fetch Weather API]
-    F -->|No| H[Use KB Context]
-    G --> I[Store in KB]
-    I --> J[LLM Synthesis]
-    H --> J
-    J --> K[Natural Response]
-```
-
-The system follows a modular pipeline for data processing:
-
-1. **Intent Extraction**: Logical analysis of the query to identify target location and information requirements.
-2. **Context Retrieval**: Similarity search against the local vector database for historical insights.
-3. **Telemetry Acquisition**: Real-time data retrieval from meteorological services.
-4. **Insight Synthesis**: DeepSeek-driven generation of natural language responses, filtered for optimal clarity.
-
----
-
-## Technical Stack
-
-- **Frameworks**: FastAPI (Backend), React (Frontend)
-- **Orchestration**: LangChain
-- **Database**: ChromaDB
-- **Styles**: Tailwind CSS
-- **Models**: DeepSeek R1T2, all-MiniLM-L6-v2
-
----
+This project is released under the MIT License.
