@@ -13,6 +13,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/")
+async def root():
+    return {
+        "status": "online",
+        "message": "Weather AI Reasoning Engine is active.",
+        "version": "1.0.0",
+        "endpoints": {
+            "chat": "/chat [POST]"
+        }
+    }
+
 class Query(BaseModel):
     message: str
 
