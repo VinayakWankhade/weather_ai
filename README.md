@@ -1,10 +1,10 @@
-# Sanchai Weather AI
+# Weather AI
 
 ## Advanced RAG System for Meteorological Intelligence
 
 ![App Demonstration](assets/app_demonstration.png)
 
-Sanchai Weather AI is a production-grade Retrieval-Augmented Generation (RAG) platform designed to provide conversational meteorological insights. It leverages a sophisticated reasoning engine to synthesize real-time telemetry with historical context, providing a highly accurate and context-aware user experience.
+Weather AI is a production-grade Retrieval-Augmented Generation (RAG) platform designed to provide conversational meteorological insights. It leverages a sophisticated reasoning engine to synthesize real-time telemetry with historical context, providing a highly accurate and context-aware user experience.
 
 The project is built with a focus on resource efficiency and democratized access, utilizing open-weights models and free-tier API integrations without compromising on professional standards or architectural integrity.
 
@@ -110,6 +110,3 @@ The application will be accessible at `http://localhost:5173`.
 
 ---
 
-## License
-
-This project is released under the MIT License.
