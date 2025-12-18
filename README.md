@@ -110,3 +110,10 @@ The application will be accessible at `http://localhost:5173`.
 
 ---
 
+## Deployment
+
+For professional deployment strategies including Vercel integration, please refer to the [Deployment Guide](DEPLOYMENT_GUIDE.md).
+
+## License
+
+This project is released under the MIT License.
