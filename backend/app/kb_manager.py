@@ -20,13 +20,21 @@ class WeatherKB:
     """
     
     def __init__(self):
-        self.embeddings = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
-        self.vector_store = Chroma(
-            collection_name=COLLECTION_NAME,
-            embedding_function=self.embeddings,
-            persist_directory=DB_DIR
-        )
-        logger.info(f"Weather KB initialized with model: {EMBEDDING_MODEL}")
+        self.embeddings = None
+        self.vector_store = None
+        logger.info(f"Weather KB staged (deferred initialization)")
+
+    def _ensure_initialized(self):
+        """Lazy-load the heavy embedding model and vector store."""
+        if self.embeddings is None:
+            logger.info(f"Initializing embedding model: {EMBEDDING_MODEL}...")
+            self.embeddings = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
+            self.vector_store = Chroma(
+                collection_name=COLLECTION_NAME,
+                embedding_function=self.embeddings,
+                persist_directory=DB_DIR
+            )
+            logger.info("Weather KB fully initialized.")
 
     def generate_insight_document(self, city: str, country: str, data: Dict[str, Any]) -> str:
         """
@@ -54,6 +62,7 @@ class WeatherKB:
         """
         Adds a new meteorological insight to the vector store.
         """
+        self._ensure_initialized()
         insight_text = self.generate_insight_document(city, country, data)
         doc = Document(
             page_content=insight_text,
@@ -68,6 +77,7 @@ class WeatherKB:
         Useful for grounding the LLM in historical or comparable telemetry.
         """
         try:
+            self._ensure_initialized()
             results = self.vector_store.similarity_search(query, k=k)
             return [doc.page_content for doc in results]
         except Exception as e:
